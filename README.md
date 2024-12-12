@@ -6,7 +6,11 @@ nmap - to find services open on server
 
 ## netdiscover
 netdiscover - to find active machines
-
+* Scan Entire Network for ALive host using ARP
+```console
+netdiscover -i eth0
+netdiscover -r x.x.x.1/24
+```
 ## hydra
 
 hydra - to bruteforce usernames and passwords.
