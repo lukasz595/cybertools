@@ -24,7 +24,16 @@ Find the FQDN in a subnet/network
 nmap -p389 –sV -iL <target_list>  or nmap -p389 –sV <target_IP> 
 ``` 
 
+To perform a port and service discovery scan.
+```console
+nmap -T4 -A -v www.example.com
+``` 
+* -T4: specifies setting time template (0-5),
+* -A: specifies aggressive scan,
+* -v: enables the verbose output (include all hosts and ports in the output).
+
 Comprehensive Scan
+
 ```console
 nmap -Pn -A x.x.x.1/24 -vv --open   
 ```
