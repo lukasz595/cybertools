@@ -17,7 +17,7 @@ nmap -p port x.x.x.1/24 --open
 ```
 To find the OS 
 ```console
-nmap -O x.x.x.x 
+nmap -O -sV x.x.x.x 
 ```
 Find the FQDN in a subnet/network
 ```console
