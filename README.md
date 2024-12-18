@@ -32,6 +32,12 @@ nmap -T4 -A -v www.example.com
 * -A: specifies aggressive scan,
 * -v: enables the verbose output (include all hosts and ports in the output).
 
+To Perform LDAP enumeration on the target network and find out how many user accounts are associated with the domain. 
+
+```console
+nmap 10.10.10.25 --script=*user*
+``` 
+
 Comprehensive Scan
 
 ```console
