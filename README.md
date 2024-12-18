@@ -60,6 +60,13 @@ Ustawia wysoki poziom szczegółowości w wyjściu (Verbose Mode).
 Wyświetla tylko hosty i porty, które są otwarte.
 Ignoruje porty zamknięte lub filtrowane, aby skupić się wyłącznie na tych, które mogą świadczyć usługi lub być potencjalnie dostępne.
 
+## ldapsearch
+To perform an LDAP Search on the Domain Controller machine and find out the version of the LDAP protocol
+
+```console
+ldapsearch -x -H ldap://10.10.10.25
+```
+
 ## netdiscover
 netdiscover - to find active machines
 
