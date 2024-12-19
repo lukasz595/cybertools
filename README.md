@@ -123,6 +123,10 @@ hydra -l admin -P passlist.txt -o test.txt x.x.x.x telnet
 ##BinText
 *Analyze the malware and find out the File pos for KERNEL32.dll text.
 
+##ServiceType
+*Perform windows service monitoring and find out the service type associated with display name "Name".
+(Get-Service -Name "Name").ServiceType
+
 ## wpscan
 wpscan - to bruteforce wordpress website (users and passwords)
 
