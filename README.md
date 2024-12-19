@@ -150,6 +150,13 @@ whatweb SITE
 wget -q- S SITE
 ```
 
+## cURL
+* Perform Web Crawling on the web application SITE and identify the number of live png files in images folder.
+
+```console
+curl SITE | grep .png | wc -l
+```
+
 ## wpscan
 wpscan - to bruteforce wordpress website (users and passwords)
 
