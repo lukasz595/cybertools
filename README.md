@@ -137,10 +137,17 @@ GET / HTTP/1.0
 (Get-Service -Name "Name").ServiceType
 
 ## Whatweb
-* TO Perform an HTTP-recon on SITE and find out the version of Nginx used by the web server.
-* 
+* T Perform an HTTP-recon on SITE and find out the version of Nginx used by the web server.
+  
 ```console
 whatweb SITE
+```
+
+## WGET
+* To Perform an HTTP-recon on SITE and find out the version of Nginx used by the web server.
+  
+```console
+wget -q- S SITE
 ```
 
 ## wpscan
