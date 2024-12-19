@@ -165,9 +165,16 @@ wpscan - to bruteforce wordpress website (users and passwords)
 wpscan --url http://example.com/share --enumerate u
 ```
   * Direct crack if we have user/password detail
+    
 ```console
 wpscan --url http://x.x.x.x/wordpress/ -U users.txt -P /usr/share/wordlists/rockyou.txt
 wpscan --url http://x.x.x.x:8080/SHARE -u <user> -P ~/wordlists/password.txt
+```
+
+## pwnXSS
+* To Perform XSS vulnerability test on SITE and identify whether the application is vulnerable to attack or not. (z http:// , bez www)
+```console
+python3 pwnxss.py -u http://wp.pl
 ```
 
 ## sqlmap
