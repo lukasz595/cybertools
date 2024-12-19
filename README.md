@@ -85,12 +85,17 @@ responder -I eth0
 * -I eth0 - Responder zaczyna nasłuchiwać ruchu LLMNR, NBT-NS i MDNS na interfejsie eth0.
 
  In windows, try to access the shared resource, logs are stored at usr/share/responder/logs/SMB<filename>
-* To crack that hash, use JohntheRipper
+
+## John The Ripper
+* To crack SMB hash
 
 ```console
 john SMBfilename  
 ```
-
+* To crack NTLM hash using wordlist
+```console
+john ~/Documents/hashes.txt --format=NT --wordlist ~/Desktop/Wordlist/password.txt
+```
 ## hydra
 
 hydra - to bruteforce usernames and passwords.
@@ -111,8 +116,6 @@ get flag.txt .
 ```console
 hydra -l admin -P passlist.txt -o test.txt x.x.x.x telnet
 ```  
-
-## John The Ripper
 
 ## wpscan
 wpscan - to bruteforce wordpress website (users and passwords)
