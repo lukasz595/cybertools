@@ -120,6 +120,8 @@ get flag.txt .
 ```console
 hydra -l admin -P passlist.txt -o test.txt x.x.x.x telnet
 ```  
+##BinText
+*Analyze the malware and find out the File pos for KERNEL32.dll text.
 
 ## wpscan
 wpscan - to bruteforce wordpress website (users and passwords)
