@@ -127,6 +127,13 @@ hydra -l admin -P passlist.txt -o test.txt x.x.x.x telnet
 *Perform windows service monitoring and find out the service type associated with display name "Name".
 (Get-Service -Name "Name").ServiceType
 
+## Whatweb
+* TO Perform an HTTP-recon on SITE and find out the version of Nginx used by the web server.
+* 
+```console
+whatweb SITE
+```
+
 ## wpscan
 wpscan - to bruteforce wordpress website (users and passwords)
 
