@@ -120,10 +120,10 @@ get flag.txt .
 ```console
 hydra -l admin -P passlist.txt -o test.txt x.x.x.x telnet
 ```  
-##BinText
+## BinText
 *Analyze the malware and find out the File pos for KERNEL32.dll text.
 
-##ServiceType
+## ServiceType
 *Perform windows service monitoring and find out the service type associated with display name "Name".
 (Get-Service -Name "Name").ServiceType
 
