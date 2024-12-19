@@ -96,6 +96,10 @@ john SMBfilename
 ```console
 john ~/Documents/hashes.txt --format=NT --wordlist ~/Desktop/Wordlist/password.txt
 ```
+## l0phtCrack
+* To audit WINDOWS passwords: l0phtCrack –> Password Auditing Wizard –> next –> next –> A remote machine –> Host(IP.ADDRESS) –> Use Specifc User Credentials –>
+
+
 ## hydra
 
 hydra - to bruteforce usernames and passwords.
