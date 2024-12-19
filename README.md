@@ -119,7 +119,16 @@ get flag.txt .
 * telnet
 ```console
 hydra -l admin -P passlist.txt -o test.txt x.x.x.x telnet
-```  
+```
+
+## Telnet
+Perform Banner grabbing on the web application WEB (ETag)
+
+```console
+telnet WEB 80 
+GET / HTTP/1.0
+```
+
 ## BinText
 *Analyze the malware and find out the File pos for KERNEL32.dll text.
 
