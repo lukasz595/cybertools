@@ -263,6 +263,10 @@ Pull Folders from Phone to PC
 ```console
 sdcard/Download/secret.txt
 ```
+## Sisik.eu/apk-tool
+* To security audit mobile applications APK
+
+
 
 ## hashcalc
 hashcalc -  to calculate SHA1 hash
