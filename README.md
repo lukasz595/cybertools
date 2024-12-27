@@ -19,6 +19,10 @@ To find the OS
 ```console
 nmap -O -sV x.x.x.x 
 ```
+To use default scripts on specific port in aggressive mode
+```console
+nmap -p port -sC -T5 x.x.x.1/24 
+```
 Find the FQDN in a subnet/network
 ```console
 nmap -p389 –sV -iL <target_list>  or nmap -p389 –sV <target_IP> 
